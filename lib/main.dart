@@ -1,6 +1,7 @@
+
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:newapp/first_page.dart';
+import 'package:newapp/product_list.dart';
 import 'package:newapp/product_model.dart';
 import 'package:newapp/product_provider.dart';
 import 'package:provider/provider.dart';
@@ -24,8 +25,8 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: First_Page(),
+    return  MaterialApp(
+      home: Product_List(),
     );
   }
 }

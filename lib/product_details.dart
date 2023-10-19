@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:newapp/product_provider.dart';
 import 'package:provider/provider.dart';
 
-class SecondPage extends StatefulWidget {
-  const SecondPage({Key? key});
+class Product_Details extends StatefulWidget {
+  const Product_Details({Key? key});
 
   @override
-  State<SecondPage> createState() => _SecondPageState();
+  State<Product_Details> createState() => _Product_DetailsState();
 }
 
-class _SecondPageState extends State<SecondPage> {
+class _Product_DetailsState extends State<Product_Details> {
   @override
   Widget build(BuildContext context) {
     final productProvider = Provider.of<ProductProvider>(context);

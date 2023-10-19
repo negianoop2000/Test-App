@@ -3,19 +3,19 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:newapp/product_model.dart';
 import 'package:newapp/product_provider.dart';
-import 'package:newapp/second_page.dart';
+import 'package:newapp/product_details.dart';
 import 'package:provider/provider.dart';
 import 'dart:convert';
 import 'package:shimmer/shimmer.dart';
 
-class First_Page extends StatefulWidget {
-  const First_Page({super.key});
+class Product_List extends StatefulWidget {
+  const Product_List({super.key});
 
   @override
-  State<First_Page> createState() => _First_PageState();
+  State<Product_List> createState() => _Product_ListState();
 }
 
-class _First_PageState extends State<First_Page> {
+class _Product_ListState extends State<Product_List> {
   bool isLoading = false;
   final String apiURL = "https://fakestoreapi.com/products";
   final String hiveBoxName = "products";
@@ -112,7 +112,7 @@ class _First_PageState extends State<First_Page> {
                           productProvider.selectProduct(product);
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const SecondPage()),
+                      MaterialPageRoute(builder: (context) =>  Product_Details()),
                     );
                   },
                   child: ProductListItem(product: product),
