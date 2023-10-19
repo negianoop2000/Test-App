@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:newapp/cart_provider.dart';
 import 'package:newapp/product_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -16,6 +17,8 @@ class _Product_DetailsState extends State<Product_Details> {
     final selectedProduct = productProvider.selectedProduct;
 
     if (selectedProduct == null) {
+
+
       // Handle the case when no product is selected.
       return Center(child: Text("No product selected"));
     }
@@ -33,25 +36,28 @@ class _Product_DetailsState extends State<Product_Details> {
             children: [
               SizedBox(height: 20),
               Center(
-                child: Container(
-                  width: 300,
-                  height: 300,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12.0),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 5,
-                        blurRadius: 7,
-                        offset: Offset(0, 3),
+                child: Hero(
+                  tag: 'product_${selectedProduct.id}',
+                  child: Container(
+                    width: 300,
+                    height: 300,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12.0),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 5,
+                          blurRadius: 7,
+                          offset: Offset(0, 3),
+                        ),
+                      ],
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(12.0),
+                      child: Image.network(
+                        selectedProduct.image,
+                        fit: BoxFit.fill,
                       ),
-                    ],
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(12.0),
-                    child: Image.network(
-                      selectedProduct.image,
-                      fit: BoxFit.fill,
                     ),
                   ),
                 ),
@@ -100,7 +106,16 @@ class _Product_DetailsState extends State<Product_Details> {
                   color: Colors.grey[700],
                 ),
               ),
+              SizedBox(height: 10),
+              ElevatedButton(onPressed: (){
+                final cartProvider = Provider.of<CartProvider>(context, listen: false);
+                cartProvider.addToCart(selectedProduct);
 
+              },
+                  style: ButtonStyle(
+                    backgroundColor:MaterialStateProperty.all<Color>(Colors.black),
+                  ),
+                  child: const Text("Add to Cart",))
             ],
           ),
         ),

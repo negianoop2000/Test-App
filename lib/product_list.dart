@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:http/http.dart' as http;
+import 'package:newapp/cart_page.dart';
 import 'package:newapp/product_model.dart';
 import 'package:newapp/product_provider.dart';
 import 'package:newapp/product_details.dart';
@@ -52,7 +53,7 @@ class _Product_ListState extends State<Product_List> {
         });
       } else {
         final productsBox = await Hive.openBox<Product>(hiveBoxName);
-            print("store");
+        print("store");
         if (productsBox.isNotEmpty) {
           // If there is data in Hive, load it
           setState(() {
@@ -91,9 +92,6 @@ class _Product_ListState extends State<Product_List> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.purple[200],
-
-
-
         title: Text("Product List"),
       ),
       body: Column(
@@ -102,14 +100,14 @@ class _Product_ListState extends State<Product_List> {
             child: isLoading
                 ? ShimmerList()
                 : ListView.builder(
-                     itemCount: data.length,
-                          itemBuilder: (context, index) {
-                     final product = data[index];
+              itemCount: data.length,
+              itemBuilder: (context, index) {
+                final product = data[index];
 
                 return GestureDetector(
                   onTap: () {
                     final productProvider = Provider.of<ProductProvider>(context, listen: false);
-                          productProvider.selectProduct(product);
+                    productProvider.selectProduct(product);
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) =>  Product_Details()),
@@ -122,6 +120,15 @@ class _Product_ListState extends State<Product_List> {
           ),
 
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) =>  CartPage()),
+          );
+        },
+        child: Icon(Icons.add_shopping_cart),
       ),
     );
   }
@@ -148,49 +155,52 @@ class ProductListItem extends StatelessWidget {
         color: Colors.grey[300],
         borderRadius: BorderRadius.circular(20),
       ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          // crossAxisAlignment: CrossAxisAlignment.start,
-           children: [
-             Container(
-               width: 150,
-               height: double.infinity,
-               child: ClipRRect(
-                 borderRadius: BorderRadius.circular(12.0),
-                 child: Image.network(
-                   product.image,
-                   fit: BoxFit.fill,
-                 ),
-               ),
-             ),
-             const SizedBox(width: 10,),
-             Expanded(
-               child: SingleChildScrollView(
-                 child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                   crossAxisAlignment: CrossAxisAlignment.start,
-                   children: [
-                     Text(
-                       product.title,
-                       style: const TextStyle(fontSize: 20
-                       ,fontWeight: FontWeight.bold),
-                     ),
-                     Text(
-                       product.category,
-                       style: const TextStyle(fontSize: 15,
-                       color: Colors.red),
-                     ),
-                     Text(
-                       "Price: \$${product.price.toStringAsFixed(2)}",
-                       style: const TextStyle(fontSize: 15,
-                           color: Colors.green),
-                     ),
-                   ],
-                 ),
-               ),
-             ),
-           ],
-        ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        // crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Hero(
+            tag: 'product_${product.id}',
+            child: Container(
+              width: 150,
+              height: double.infinity,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(12.0),
+                child: Image.network(
+                  product.image,
+                  fit: BoxFit.fill,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(width: 10,),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    product.title,
+                    style: const TextStyle(fontSize: 20
+                        ,fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    product.category,
+                    style: const TextStyle(fontSize: 15,
+                        color: Colors.red),
+                  ),
+                  Text(
+                    "Price: \$${product.price.toStringAsFixed(2)}",
+                    style: const TextStyle(fontSize: 15,
+                        color: Colors.green),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -208,7 +218,7 @@ class ShimmerList extends StatelessWidget {
           return ListTile(
             title: Container(
               width: double.infinity,
-              height: 100,
+              height: 200,
               color: Colors.white,
             ),
           );
