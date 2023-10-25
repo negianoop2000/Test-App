@@ -8,11 +8,10 @@ import io.flutter.plugin.common.MethodCall
 import android.widget.Toast
 
 class MainActivity : FlutterActivity() {
-    private val CHANNEL = "your_channel_name" // Replace with your actual channel name
+    private val CHANNEL = "message" // Replace with your actual channel name
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
-
         // Set up a method channel to handle communication from Flutter
         val messenger: BinaryMessenger = flutterEngine.dartExecutor
         MethodChannel(messenger, CHANNEL).setMethodCallHandler { call, result ->
