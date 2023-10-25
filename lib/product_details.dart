@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:newapp/cart_provider.dart';
+import 'package:newapp/plaform_channel.dart';
 import 'package:newapp/product_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -107,15 +108,20 @@ class _Product_DetailsState extends State<Product_Details> {
                 ),
               ),
               SizedBox(height: 10),
-              ElevatedButton(onPressed: (){
-                final cartProvider = Provider.of<CartProvider>(context, listen: false);
-                cartProvider.addToCart(selectedProduct);
+              ElevatedButton(
+                onPressed: () {
+                  final cartProvider = Provider.of<CartProvider>(context, listen: false);
+                  cartProvider.addToCart(selectedProduct);
 
-              },
-                  style: ButtonStyle(
-                    backgroundColor:MaterialStateProperty.all<Color>(Colors.black),
-                  ),
-                  child: const Text("Add to Cart",))
+                  // Call the platform channel to show a message
+                  PlatformChannel.showMessage('Product added to cart');
+                },
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                ),
+                child: const Text("Add to Cart"),
+              )
+
             ],
           ),
         ),
