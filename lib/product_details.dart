@@ -90,8 +90,6 @@ class _Product_DetailsState extends State<Product_Details> {
                 ),
               ),
               SizedBox(height: 10),
-
-
               Text(
                 "Category: ${selectedProduct.category}",
                 style: TextStyle(
