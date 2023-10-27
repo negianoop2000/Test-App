@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:newapp/cart_page.dart';
@@ -20,14 +21,25 @@ class _Product_ListState extends State<Product_List> {
   bool isLoading = false;
   final String apiURL = "https://fakestoreapi.com/products";
   final String hiveBoxName = "products";
+  final TextEditingController _searchController = TextEditingController();
+  List<Product> data = [];
+  List<Product> filteredData = [];
 
   @override
   void initState() {
     super.initState();
     fetchData();
+
   }
 
-  List<Product> data = [];
+  void filterProducts(String query) {
+    setState(() {
+      filteredData = data
+          .where((product) =>
+          product.title.toLowerCase().contains(query.toLowerCase()))
+          .toList();
+    });
+  }
 
   Future<void> fetchData() async {
     setState(() {
@@ -87,6 +99,10 @@ class _Product_ListState extends State<Product_List> {
   }
 
 
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -96,21 +112,41 @@ class _Product_ListState extends State<Product_List> {
       ),
       body: Column(
         children: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: TextField(
+              controller: _searchController,
+              decoration: InputDecoration(
+                labelText: "Search Products",
+                prefixIcon: Icon(Icons.search),
+              ),
+              onChanged: (query) {
+                filterProducts(query);
+              },
+            ),
+          ),
           Expanded(
             child: isLoading
                 ? ShimmerList()
                 : ListView.builder(
-              itemCount: data.length,
+              itemCount: filteredData.isNotEmpty
+                  ? filteredData.length
+                  : data.length,
               itemBuilder: (context, index) {
-                final product = data[index];
+                final product = filteredData.isNotEmpty
+                    ? filteredData[index]
+                    : data[index];
 
                 return GestureDetector(
                   onTap: () {
-                    final productProvider = Provider.of<ProductProvider>(context, listen: false);
+                    final productProvider =
+                    Provider.of<ProductProvider>(context, listen: false);
                     productProvider.selectProduct(product);
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) =>  Product_Details()),
+                      MaterialPageRoute(
+                        builder: (context) => Product_Details(),
+                      ),
                     );
                   },
                   child: ProductListItem(product: product),
@@ -118,14 +154,13 @@ class _Product_ListState extends State<Product_List> {
               },
             ),
           ),
-
         ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) =>  CartPage()),
+            MaterialPageRoute(builder: (context) => CartPage()),
           );
         },
         child: Icon(Icons.add_shopping_cart),
@@ -133,6 +168,7 @@ class _Product_ListState extends State<Product_List> {
     );
   }
 }
+
 
 
 class ProductListItem extends StatelessWidget {
@@ -219,7 +255,13 @@ class ShimmerList extends StatelessWidget {
             title: Container(
               width: double.infinity,
               height: 200,
-              color: Colors.white,
+              margin: const EdgeInsets.only(
+                bottom: 20,
+              ),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+              ),
             ),
           );
         },

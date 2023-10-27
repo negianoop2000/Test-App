@@ -4,6 +4,7 @@ import 'package:newapp/plaform_channel.dart';
 import 'package:newapp/product_provider.dart';
 import 'package:provider/provider.dart';
 
+import 'package:flutter/services.dart';
 class Product_Details extends StatefulWidget {
   const Product_Details({Key? key});
 
@@ -12,6 +13,16 @@ class Product_Details extends StatefulWidget {
 }
 
 class _Product_DetailsState extends State<Product_Details> {
+
+  void turnOnFlashlight() async {
+    const channel = MethodChannel('flashlight');
+    try {
+      await channel.invokeMethod('turnOnFlashlight');
+    } on PlatformException catch (e) {
+      // Handle errors here
+      print("Error: ${e.message}");
+    }
+  }
   @override
   Widget build(BuildContext context) {
     final productProvider = Provider.of<ProductProvider>(context);
@@ -108,6 +119,7 @@ class _Product_DetailsState extends State<Product_Details> {
               SizedBox(height: 10),
               ElevatedButton(
                 onPressed: () {
+                  turnOnFlashlight();
                   final cartProvider = Provider.of<CartProvider>(context, listen: false);
                   cartProvider.addToCart(selectedProduct);
 
