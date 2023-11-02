@@ -1,8 +1,9 @@
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:newapp/product_list.dart';
 
 import 'Firebase Services/google_signin.dart';
-
+import 'package:firebase_analytics/firebase_analytics.dart';
 class Login_Signup extends StatefulWidget {
   const Login_Signup({super.key});
 
@@ -11,6 +12,15 @@ class Login_Signup extends StatefulWidget {
 }
 
 class _Login_SignupState extends State<Login_Signup> {
+
+  final FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    analytics.setAnalyticsCollectionEnabled(true);
+
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,13 +42,14 @@ class _Login_SignupState extends State<Login_Signup> {
                     return Colors.white;
                   })),
                   onPressed: () async {
+                    FirebaseAnalytics.instance.logEvent(name: 'google login');
                     await FirebaseServices().signInWithGoogle();
                     Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
                             builder: (context) => const Product_List()));
                   },
-                  child: Row(
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Padding(
@@ -57,7 +68,11 @@ class _Login_SignupState extends State<Login_Signup> {
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
                             fontSize: 20),
-                      )
+                      ),
+                      TextButton(
+                        onPressed: () => FirebaseCrashlytics.instance.crash(),
+                        child: const Text("Throw Test Exception"),
+                      ),
                     ],
                   )),
             )

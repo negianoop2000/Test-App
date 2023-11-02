@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
-
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:newapp/cart_page.dart';
 import 'package:newapp/product_model.dart';
 import 'package:newapp/product_provider.dart';
 import 'package:newapp/product_details.dart';
+import 'package:newapp/signup.dart';
 import 'package:provider/provider.dart';
 import 'dart:convert';
 import 'package:shimmer/shimmer.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
+import 'Firebase Services/google_signin.dart';
 class Product_List extends StatefulWidget {
   const Product_List({super.key});
 
@@ -30,6 +34,20 @@ class _Product_ListState extends State<Product_List> {
     super.initState();
     fetchData();
 
+
+  }
+
+  Future<Widget> loadAndDisplayImage() async {
+    String imagePath = 'img1.png'; // Replace with the actual path to your image in Firebase Storage
+
+    // Create a reference to the Firebase Storage location of the image.
+    Reference storageRef = FirebaseStorage.instance.ref().child(imagePath);
+
+    // Get the download URL of the image.
+    String downloadURL = await storageRef.getDownloadURL();
+
+    // Use the download URL to load and display the image using the Image.network widget.
+    return Image.network(downloadURL);
   }
 
   void filterProducts(String query) {
@@ -109,6 +127,31 @@ class _Product_ListState extends State<Product_List> {
       appBar: AppBar(
         backgroundColor: Colors.purple[200],
         title: Text("Product List"),
+        actions:
+           [
+            FutureBuilder<Widget>(
+              future: loadAndDisplayImage(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  return snapshot.data ?? Text("Image not found");
+                } else if (snapshot.hasError) {
+                  return Text("Error loading image");
+                } else {
+                  return CircularProgressIndicator(); // Show a loading indicator while the image is being fetched.
+                }
+              },
+            ),
+            IconButton(
+              onPressed: () async {
+                await FirebaseServices().googleSignOut();
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const Login_Signup()));
+              },
+              icon: Icon(Icons.logout_outlined, size: 30, color: Colors.black),
+            ),
+          ],
       ),
       body: Column(
         children: [

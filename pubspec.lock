@@ -13,10 +13,10 @@ packages:
     dependency: transitive
     description:
       name: _flutterfire_internals
-      sha256: "7bcb5c5d62b3907fb4a269c0f0843df46760d38e12829a715f2ff1fb492f19ef"
+      sha256: "5dadadeecceac19d6a63c9d2e037bb8df58ddd4aedb94e8a056af2f39ee50f9d"
       url: "https://pub.dev"
     source: hosted
-    version: "1.3.10"
+    version: "1.3.11"
   analyzer:
     dependency: transitive
     description:
@@ -241,6 +241,54 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "7.0.0"
+  firebase_analytics:
+    dependency: "direct dev"
+    description:
+      name: firebase_analytics
+      sha256: fb8c29d97d29aed258d2fd98ba0ffc04ccca2c7b830b149187679524757f5d9d
+      url: "https://pub.dev"
+    source: hosted
+    version: "10.6.3"
+  firebase_analytics_platform_interface:
+    dependency: transitive
+    description:
+      name: firebase_analytics_platform_interface
+      sha256: "85fe94377732a168896a705410441b721a49c0703679c24e3edca0c680a45bb7"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.7.5"
+  firebase_analytics_web:
+    dependency: transitive
+    description:
+      name: firebase_analytics_web
+      sha256: "99a39a97e4760011ca0f2135c68a40f65dc9b260a0c27db2fdcb1258052c588b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.5.5+5"
+  firebase_app_check:
+    dependency: "direct dev"
+    description:
+      name: firebase_app_check
+      sha256: "25d3a2fe73243221080c6dec26d3bd1b0556d765265e64a385a9e354888d4284"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.1+2"
+  firebase_app_check_platform_interface:
+    dependency: transitive
+    description:
+      name: firebase_app_check_platform_interface
+      sha256: ae61e0af37dd2d08f6796c579306c5864c58940231b4b40e4bf96abe9a6c82de
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.0+4"
+  firebase_app_check_web:
+    dependency: transitive
+    description:
+      name: firebase_app_check_web
+      sha256: caa5014067bae9f4d56c763638708199435a6f24db4c5f485caa68cc99637aff
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.0+4"
   firebase_auth:
     dependency: "direct dev"
     description:
@@ -269,10 +317,10 @@ packages:
     dependency: "direct dev"
     description:
       name: firebase_core
-      sha256: "37299e4907391d7fac8c7ea059bb3292768cc07b72b6c6c777675cc58da2ef4d"
+      sha256: "7706f4ade6cc2698c70074083bc262586a185047f6bfdd53938dcc35d35cbb9e"
       url: "https://pub.dev"
     source: hosted
-    version: "2.20.0"
+    version: "2.21.0"
   firebase_core_platform_interface:
     dependency: transitive
     description:
@@ -289,6 +337,46 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.8.1"
+  firebase_crashlytics:
+    dependency: "direct main"
+    description:
+      name: firebase_crashlytics
+      sha256: c1f6b7a75df5f83af187b396d763de0e7673fcb358093e04be68e82e6d80d41a
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.4.3"
+  firebase_crashlytics_platform_interface:
+    dependency: transitive
+    description:
+      name: firebase_crashlytics_platform_interface
+      sha256: "08f0a3a99a12a31a47a08ccb268efe163c2f0d89fec74eb5b8a86b219611175c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.6.11"
+  firebase_storage:
+    dependency: "direct dev"
+    description:
+      name: firebase_storage
+      sha256: c00e907fe1a136a662c47d60faf971094a5441095438c065f66c2f39dff47a9a
+      url: "https://pub.dev"
+    source: hosted
+    version: "11.4.0"
+  firebase_storage_platform_interface:
+    dependency: transitive
+    description:
+      name: firebase_storage_platform_interface
+      sha256: "387f903eb7cbe63e77197e73987c84201335c42250b7284580e3bac42ffd9dd4"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.0.0"
+  firebase_storage_web:
+    dependency: transitive
+    description:
+      name: firebase_storage_web
+      sha256: "6128bfd8e03418983d457b980bf4fcc73e1fc88f51d00b3e04db8376a41d3047"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.6.11"
   fixnum:
     dependency: transitive
     description:
@@ -344,126 +432,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.2.2"
-  google_ml_kit:
-    dependency: "direct dev"
-    description:
-      name: google_ml_kit
-      sha256: "9d98ed5ff96c1295d08f96c807a70d53b56a43a7a18ae86d4ea4d09cf7310fc9"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.16.2"
-  google_mlkit_barcode_scanning:
-    dependency: transitive
-    description:
-      name: google_mlkit_barcode_scanning
-      sha256: "033401bc992315fe3d6ed9265b97bf1e620fa12ddaffda830107d6852abcde77"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.9.0"
-  google_mlkit_commons:
-    dependency: transitive
-    description:
-      name: google_mlkit_commons
-      sha256: "42173a8ba89f386486cc5b8249e84da4a4b861daa70498373627d985eb418689"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.5.0"
-  google_mlkit_digital_ink_recognition:
-    dependency: transitive
-    description:
-      name: google_mlkit_digital_ink_recognition
-      sha256: f48a90cd2bb8dc6a0432a1ba89a1a488d4e7ba3132fe4dfd75a9eab0e0a1b90a
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.9.0"
-  google_mlkit_entity_extraction:
-    dependency: transitive
-    description:
-      name: google_mlkit_entity_extraction
-      sha256: e4801253f9913a84793f338fb45923825fc2799f8608a1f0d0f5ca43b5062fbc
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.10.0"
-  google_mlkit_face_detection:
-    dependency: transitive
-    description:
-      name: google_mlkit_face_detection
-      sha256: "567339c67530b22b22917622df9bba40547a4719fa108819901f95ffb7cd3399"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.8.0"
-  google_mlkit_face_mesh_detection:
-    dependency: transitive
-    description:
-      name: google_mlkit_face_mesh_detection
-      sha256: "3f64635fe096fef3167da6f69a30b1744ddfb4590acdaa2b7757c6f30455b0f5"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.0.1"
-  google_mlkit_image_labeling:
-    dependency: transitive
-    description:
-      name: google_mlkit_image_labeling
-      sha256: "38c7225e22ec558bfd78015ef9e9ae4812cee8715f03a9c82b87d3e0b530d00c"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.9.0"
-  google_mlkit_language_id:
-    dependency: transitive
-    description:
-      name: google_mlkit_language_id
-      sha256: cb4241297552f22be638be620add294b6a6c9043eefc1f4c18597ee66ce31a98
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.8.0"
-  google_mlkit_object_detection:
-    dependency: transitive
-    description:
-      name: google_mlkit_object_detection
-      sha256: "52b11c335cbf45da561127de586e1ab32ba5526eb04d7a3a683c787279a47153"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.10.0"
-  google_mlkit_pose_detection:
-    dependency: transitive
-    description:
-      name: google_mlkit_pose_detection
-      sha256: "08759fc095751cf84f6758f276212881388e04210c64087341e260f9f233316e"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.9.0"
-  google_mlkit_selfie_segmentation:
-    dependency: transitive
-    description:
-      name: google_mlkit_selfie_segmentation
-      sha256: "5b2931f86e9476daaf5710f9e0d281ec06f7d0ee664a3688b791bfcfb7c4afd5"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.5.0"
-  google_mlkit_smart_reply:
-    dependency: transitive
-    description:
-      name: google_mlkit_smart_reply
-      sha256: "97165ea8667aa94de20d782862ecd791daf0e884c48b8cb1cedd9ebafda5d52c"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.8.0"
-  google_mlkit_text_recognition:
-    dependency: transitive
-    description:
-      name: google_mlkit_text_recognition
-      sha256: "588021c99536fdfb173eeecc4ee1b60ea4e0bd4be9787f52363c85346ae20364"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.10.0"
-  google_mlkit_translation:
-    dependency: transitive
-    description:
-      name: google_mlkit_translation
-      sha256: "175a0cb801b5fa01140f62344bbda6a8dcbb7977ae057f1dab1b74eddc60d71c"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.8.0"
   google_sign_in:
     dependency: "direct dev"
     description:
@@ -720,6 +688,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.11.1"
+  pinput:
+    dependency: "direct dev"
+    description:
+      name: pinput
+      sha256: a92b55ecf9c25d1b9e100af45905385d5bc34fc9b6b04177a9e82cb88fe4d805
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.1"
   platform:
     dependency: transitive
     description:
@@ -861,6 +837,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
+  smart_auth:
+    dependency: transitive
+    description:
+      name: smart_auth
+      sha256: a25229b38c02f733d0a4e98d941b42bed91a976cb589e934895e60ccfa674cf6
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.1"
   source_gen:
     dependency: transitive
     description:
@@ -973,6 +957,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.2"
+  universal_platform:
+    dependency: transitive
+    description:
+      name: universal_platform
+      sha256: d315be0f6641898b280ffa34e2ddb14f3d12b1a37882557869646e0cc363d0cc
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0+1"
   vector_math:
     dependency: transitive
     description:

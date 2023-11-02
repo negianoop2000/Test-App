@@ -38,6 +38,7 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+  firebase_crashlytics: ^3.4.3
 
 dev_dependencies:
   flutter_test:
@@ -54,7 +55,11 @@ dev_dependencies:
   firebase_auth: ^4.12.0
   google_sign_in: ^6.1.5
   shared_preferences: ^2.2.2
-  google_ml_kit: ^0.16.2
+  pinput: ^3.0.1
+  firebase_storage: ^11.4.0
+  firebase_app_check: ^0.2.1+2
+  firebase_analytics: ^10.6.3
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -74,6 +79,8 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
+  assets:
+    - assets/
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
