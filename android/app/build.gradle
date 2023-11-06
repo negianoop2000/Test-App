@@ -2,12 +2,9 @@ plugins {
     id "com.android.application"
     id "kotlin-android"
     id "dev.flutter.flutter-gradle-plugin"
-    id "com.google.gms.google-services"
-    //id 'com.google.gms.google-services' version '4.4.0' apply false
     id 'com.google.firebase.crashlytics'
-
+    id 'com.google.gms.google-services'
 }
-
 
 
 
@@ -60,6 +57,7 @@ android {
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -76,15 +74,11 @@ flutter {
 }
 
 dependencies {
-    implementation("com.google.firebase:firebase-analytics-ktx")
-    implementation("com.google.firebase:firebase-auth")
+    // Import the BoM for the Firebase platform
     implementation(platform("com.google.firebase:firebase-bom:32.5.0"))
 
-    implementation 'com.google.firebase:firebase-analytics:17.4.1'
-    implementation("com.google.firebase:firebase-crashlytics-ktx")
-
+    // Add the dependencies for the Crashlytics and Analytics libraries
+    // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation("com.google.firebase:firebase-crashlytics")
-
-
+    implementation("com.google.firebase:firebase-analytics")
 }
-apply plugin: 'com.google.firebase.crashlytics'

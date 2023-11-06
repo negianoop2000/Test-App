@@ -11,6 +11,8 @@ import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.BinaryMessenger
 import android.widget.Toast
+import android.view.ViewGroup
+import android.widget.Button
 
 class MainActivity : FlutterActivity() {
     private val MESSAGE_CHANNEL = "message" // Replace with your actual message channel name
@@ -18,11 +20,6 @@ class MainActivity : FlutterActivity() {
 
     override fun configureFlutterEngine(@NonNull flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
-
-
-
-
-
 
         // Set up the "showMessage" method channel to handle communication from Flutter
         val messageChannelMessenger: BinaryMessenger = flutterEngine.dartExecutor
@@ -55,5 +52,20 @@ class MainActivity : FlutterActivity() {
                 result.notImplemented()
             }
         }
+
+        // Add the "Test Crash" button to the layout
+        val crashButton = Button(this)
+        crashButton.text = "Test Crash"
+        crashButton.setOnClickListener {
+            throw RuntimeException("Test Crash") // Force a crash
+        }
+
+        val layoutParams = ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+
+        // Add the button to the view
+        addContentView(crashButton, layoutParams)
     }
 }

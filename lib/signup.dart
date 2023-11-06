@@ -12,13 +12,16 @@ class Login_Signup extends StatefulWidget {
 }
 
 class _Login_SignupState extends State<Login_Signup> {
+  final FirebaseAnalytics _analytics = FirebaseAnalytics.instance;
 
-  final FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    analytics.setAnalyticsCollectionEnabled(true);
+    _analytics.setCurrentScreen(screenName: 'SignupPage');
+
+    _analytics.setAnalyticsCollectionEnabled(true);
 
   }
   @override
@@ -42,8 +45,10 @@ class _Login_SignupState extends State<Login_Signup> {
                     return Colors.white;
                   })),
                   onPressed: () async {
-                    FirebaseAnalytics.instance.logEvent(name: 'google login');
+                    _analytics.setCurrentScreen(screenName: ' login Screen');
                     await FirebaseServices().signInWithGoogle();
+                    _analytics.logEvent(name: 'google_login');
+
                     Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
