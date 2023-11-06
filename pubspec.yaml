@@ -60,6 +60,7 @@ dev_dependencies:
   firebase_storage: ^11.4.0
   firebase_app_check: ^0.2.1+2
   firebase_analytics: ^10.6.3
+  mocktail: ^1.0.1
 
 
   # The "flutter_lints" package below contains a set of recommended lints to
