@@ -17,7 +17,6 @@ class _Login_SignupState extends State<Login_Signup> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _analytics.setCurrentScreen(screenName: 'SignupPage');
 

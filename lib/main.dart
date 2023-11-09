@@ -1,20 +1,17 @@
-
-
 import 'dart:ui';
-
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:newapp/cart_provider.dart';
 import 'package:newapp/phonelogin.dart';
 import 'package:newapp/signup.dart';
-import 'package:newapp/product_list.dart';
 import 'package:newapp/product_model.dart';
 import 'package:newapp/product_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'firebase_options.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 Future<void> main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,9 +29,13 @@ Future<void> main() async {
   };
 
 
+
   await Hive.initFlutter();
   Hive.registerAdapter(ProductAdapter());
   await Hive.openBox<Product>('products');
+  Stripe.publishableKey = 'pk_test_51O9ocZSEXjZl3XWmBNgQgc9qSZ9IPuvoe2pYdk6CU2fLYmn67DZVpYgCaEW4CBS9xFduPNgoTmUfOz7hQt2Tj75U00i1pwhwC9';
+
+  await Stripe.instance.applySettings();
   runApp(
       MultiProvider(
         providers: [

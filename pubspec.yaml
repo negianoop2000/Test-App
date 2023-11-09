@@ -61,6 +61,8 @@ dev_dependencies:
   firebase_app_check: ^0.2.1+2
   firebase_analytics: ^10.6.3
   mocktail: ^1.0.1
+  flutter_stripe: ^9.5.0+1
+
 
 
   # The "flutter_lints" package below contains a set of recommended lints to
@@ -68,7 +70,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.1
   test: ^1.24.3
   mockito: ^5.4.2
 

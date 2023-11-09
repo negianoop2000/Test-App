@@ -1,5 +1,5 @@
 package com.example.newapp
-
+import io.flutter.embedding.android.FlutterFragmentActivity
 import android.hardware.camera2.CameraAccessException
 import android.hardware.camera2.CameraManager
 import android.os.Handler
@@ -14,7 +14,7 @@ import android.widget.Toast
 import android.view.ViewGroup
 import android.widget.Button
 
-class MainActivity : FlutterActivity() {
+class MainActivity : FlutterFragmentActivity() {
     private val MESSAGE_CHANNEL = "message" // Replace with your actual message channel name
     private val FLASHLIGHT_CHANNEL = "flashlight" // Replace with your actual flashlight channel name
 

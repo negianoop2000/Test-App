@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class FirebaseServices {
   final auth = FirebaseAuth.instance;
-  final googleSignIn = GoogleSignIn();
+  late final googleSignIn = GoogleSignIn();
 
   signInWithGoogle() async {
     try {
