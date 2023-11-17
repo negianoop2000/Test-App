@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:newapp/cart_provider.dart';
 import 'package:newapp/plaform_channel.dart';
 import 'package:newapp/product_provider.dart';
+import 'package:newapp/upipayment_page.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_stripe/flutter_stripe.dart';
@@ -231,10 +232,13 @@ class _Product_DetailsState extends State<Product_Details> {
               const SizedBox(height: 20),
               InkWell(
                 onTap: () async {
-                  // final paymentMethod = await Stripe.instance.createPaymentMethod(
-                  //     params: const PaymentMethodParams.card(
-                  //         paymentMethodData: PaymentMethodData()));
-                 await makePayment();
+                // await makePayment();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => UpiPaymentScreen(),
+                    ),
+                  );
                 },
                 child: Container(
                   height: 50,
