@@ -1,14 +1,16 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:newapp/cart_provider.dart';
 import 'package:newapp/plaform_channel.dart';
 import 'package:newapp/product_provider.dart';
 import 'package:newapp/upipayment_page.dart';
+import 'package:pay/pay.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:flutter/services.dart';
+
+
 class Product_Details extends StatefulWidget {
   const Product_Details({Key? key});
 
@@ -44,7 +46,7 @@ class _Product_DetailsState extends State<Product_Details> {
               paymentIntentClientSecret:
               paymentIntentData!['client_secret'],
               //applePay: PaymentSheetApplePay.,
-              //googlePay: true,
+
               //testEnv: true,
               customFlow: true,
               style: ThemeMode.dark,
@@ -127,9 +129,6 @@ class _Product_DetailsState extends State<Product_Details> {
     final selectedProduct = productProvider.selectedProduct;
 
     if (selectedProduct == null) {
-
-
-      // Handle the case when no product is selected.
       return Center(child: Text("No product selected"));
     }
 
@@ -158,7 +157,7 @@ class _Product_DetailsState extends State<Product_Details> {
                           color: Colors.grey.withOpacity(0.5),
                           spreadRadius: 5,
                           blurRadius: 7,
-                          offset: Offset(0, 3),
+                          offset: const Offset(0, 3),
                         ),
                       ],
                     ),
@@ -172,7 +171,7 @@ class _Product_DetailsState extends State<Product_Details> {
                   ),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Text(
                 "Id: ${selectedProduct.id}",
                 style: const TextStyle(
@@ -189,7 +188,7 @@ class _Product_DetailsState extends State<Product_Details> {
                   color: Colors.indigo,
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text(
                 "Price: \$${selectedProduct.price.toStringAsFixed(2)}",
                 style: const TextStyle(
@@ -221,7 +220,6 @@ class _Product_DetailsState extends State<Product_Details> {
                   final cartProvider = Provider.of<CartProvider>(context, listen: false);
                   cartProvider.addToCart(selectedProduct);
 
-                  // Call the platform channel to show a message
                   PlatformChannel.showMessage('Product added to cart');
                 },
                 style: ButtonStyle(
@@ -232,13 +230,13 @@ class _Product_DetailsState extends State<Product_Details> {
               const SizedBox(height: 20),
               InkWell(
                 onTap: () async {
-                // await makePayment();
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => UpiPaymentScreen(),
-                    ),
-                  );
+                await makePayment();
+                //   Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //       builder: (context) => UpiPaymentScreen(),
+                //     ),
+                //   );
                 },
                 child: Container(
                   height: 50,

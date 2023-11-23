@@ -71,17 +71,18 @@ class _Product_ListState extends State<Product_List> {
         final List<dynamic> jsonList = json.decode(response.body);
         final List<Product> productList = jsonList.map((json) => Product.fromJson(json)).toList();
 
-        final productsBox = await Hive.openBox<Product>(hiveBoxName);
+       final productsBox = await Hive.openBox<Product>(hiveBoxName);
 
-        // Save data to Hive
-        await productsBox.clear();
-        await productsBox.addAll(productList);
+      //  Save data to Hive
+       await productsBox.clear();
+       await productsBox.addAll(productList);
         print("data saved");
         setState(() {
           data = productList;
           isLoading = false;
         });
-      } else {
+      }
+      else {
         final productsBox = await Hive.openBox<Product>(hiveBoxName);
         print("store");
         if (productsBox.isNotEmpty) {
@@ -98,7 +99,7 @@ class _Product_ListState extends State<Product_List> {
         }
       }
     } catch (e) {
-      // Handle API request errors, such as no internet connection
+    //  Handle API request errors, such as no internet connection
       final productsBox = await Hive.openBox<Product>(hiveBoxName);
 
       if (productsBox.isNotEmpty) {
@@ -107,7 +108,8 @@ class _Product_ListState extends State<Product_List> {
           data = productsBox.values.toList();
           isLoading = false;
         });
-      } else {
+       }
+        else {
         // Handle the case when both API and Hive data are unavailable
         setState(() {
           isLoading = false;
@@ -182,13 +184,10 @@ class _Product_ListState extends State<Product_List> {
 
                 return GestureDetector(
                   onTap: () {
-                    final productProvider =
-                    Provider.of<ProductProvider>(context, listen: false);
+                    final productProvider = Provider.of<ProductProvider>(context, listen: false);
                     productProvider.selectProduct(product);
                     Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Product_Details(),
+                      context, MaterialPageRoute(builder: (context) => Product_Details(),
                       ),
                     );
                   },
@@ -236,7 +235,7 @@ class ProductListItem extends StatelessWidget {
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
-        // crossAxisAlignment: CrossAxisAlignment.start,
+
         children: [
           Hero(
             tag: 'product_${product.id}',

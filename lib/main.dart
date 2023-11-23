@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:newapp/cart_provider.dart';
 import 'package:newapp/phonelogin.dart';
+import 'package:newapp/product_list.dart';
 import 'package:newapp/signup.dart';
 import 'package:newapp/product_model.dart';
 import 'package:newapp/product_provider.dart';
@@ -18,7 +19,7 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  await FirebaseAppCheck.instance.activate();
+ // await FirebaseAppCheck.instance.activate();
   FlutterError.onError = (errorDetails) {
     FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
   };
@@ -29,13 +30,13 @@ Future<void> main() async {
   };
 
 
-
-  await Hive.initFlutter();
-  Hive.registerAdapter(ProductAdapter());
-  await Hive.openBox<Product>('products');
   Stripe.publishableKey = 'pk_test_51O9ocZSEXjZl3XWmBNgQgc9qSZ9IPuvoe2pYdk6CU2fLYmn67DZVpYgCaEW4CBS9xFduPNgoTmUfOz7hQt2Tj75U00i1pwhwC9';
 
   await Stripe.instance.applySettings();
+  await Hive.initFlutter();
+  Hive.registerAdapter(ProductAdapter());
+  await Hive.openBox<Product>('products');
+
   runApp(
       MultiProvider(
         providers: [
@@ -55,7 +56,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  const MaterialApp(
-      home: Login_Signup(),
+      home: PhoneLogin(),
     );
   }
 }
