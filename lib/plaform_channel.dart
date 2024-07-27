@@ -1,7 +1,7 @@
 import 'package:flutter/services.dart';
 
 class PlatformChannel {
-  static const platform = MethodChannel('your_channel_name');
+  static const platform = MethodChannel('message');
 
   static Future<void> showMessage(String message) async {
     try {

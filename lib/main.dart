@@ -1,15 +1,42 @@
+import 'dart:ui';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:newapp/cart_provider.dart';
+import 'package:newapp/phonelogin.dart';
 import 'package:newapp/product_list.dart';
+import 'package:newapp/signup.dart';
 import 'package:newapp/product_model.dart';
 import 'package:newapp/product_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_app_check/firebase_app_check.dart';
+import 'firebase_options.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
+Future<void> main() async {
 
-void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+ // await FirebaseAppCheck.instance.activate();
+  FlutterError.onError = (errorDetails) {
+    FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
+  };
+  // Pass all uncaught asynchronous errors that aren't handled by the Flutter framework to Crashlytics
+  PlatformDispatcher.instance.onError = (error, stack) {
+    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+    return true;
+  };
+
+
+  Stripe.publishableKey = 'pk_test_51O9ocZSEXjZl3XWmBNgQgc9qSZ9IPuvoe2pYdk6CU2fLYmn67DZVpYgCaEW4CBS9xFduPNgoTmUfOz7hQt2Tj75U00i1pwhwC9';
+
+  await Stripe.instance.applySettings();
   await Hive.initFlutter();
   Hive.registerAdapter(ProductAdapter());
   await Hive.openBox<Product>('products');
+
   runApp(
       MultiProvider(
         providers: [
@@ -26,11 +53,10 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return  const MaterialApp(
-      home: Product_List(),
+      home: PhoneLogin(),
     );
   }
 }
